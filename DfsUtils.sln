@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DfsUtils", "DfsUtils.csproj", "{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DfsUtils", "DfsUtils\DfsUtils.csproj", "{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DfsUtilsRunner", "DfsUtilsRunner\DfsUtilsRunner.csproj", "{21FA7C68-C568-4FC8-B6D5-7222DB723372}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,12 +17,20 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Debug|x64.Build.0 = Debug|Any CPU
+		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Debug|x64.ActiveCfg = Debug|x64
+		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Debug|x64.Build.0 = Debug|x64
 		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Release|x64.ActiveCfg = Release|Any CPU
 		{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}.Release|x64.Build.0 = Release|Any CPU
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Debug|x64.ActiveCfg = Debug|x64
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Debug|x64.Build.0 = Debug|x64
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Release|x64.ActiveCfg = Release|Any CPU
+		{21FA7C68-C568-4FC8-B6D5-7222DB723372}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
