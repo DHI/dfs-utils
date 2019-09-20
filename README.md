@@ -34,7 +34,7 @@ The following tools are currently available.
 Examples can be found in the examples folder including small test dfs files. 
 
 ### From the commandline
-Runnable examples can be found in (CmdLineExamples.bat)[./examples/CmdLineExamples.bat]. 
+Runnable examples can be found in [CmdLineExamples.bat](./examples/CmdLineExamples.bat). 
 
 To get a help text just run the following
 
@@ -53,7 +53,7 @@ NOTE: here the file is dfsu but it could be any type of dfs file.
 
 
 ### From MATLAB
-Runnable examples can be found in (MatlabExamplesDfsUtils.m)[./examples/MatlabExamplesDfsUtils.m]
+Runnable examples can be found in [MatlabExamplesDfsUtils.m](./examples/MatlabExamplesDfsUtils.m)
 
 Use NET.addAssembly and the import statement to get access to the tools in DfsUtils.
 
