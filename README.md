@@ -62,7 +62,7 @@ Runnable examples can be found in [MatlabExamplesDfsUtils.m](./examples/MatlabEx
 
 Use NET.addAssembly and the import statement to get access to the tools in DfsUtils.
 
-	NET.addAssembly(path_to_assembly);
+	NET.addAssembly(path_to_dfsutillib);
 	import DHI.DFS.Utilities.*;
 	
 	differ = DfsDiff();
@@ -71,3 +71,10 @@ Use NET.addAssembly and the import statement to get access to the tools in DfsUt
 
 
 ### From Python
+Runnable examples can be found in [PythonExamples.py](./examples/PythonExamples.py)
+
+
+	import clr
+	clr.AddReference(path_to_dfsutillib)
+	from DHI.DFS.Utilities import DfsTimeStepsExtractor
+	DfsTimeStepsExtractor.Extract('.\data\TS1.dfs0', '.\output\pyt.dfs0', 0,3) 
