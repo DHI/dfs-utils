@@ -39,7 +39,7 @@ filein  = 'data\TS1.dfs0';
 fileout = 'output\scale2.dfs0';
 multi.Run(filein,2.0,fileout);
 
-%% example 6
+%% example 7
 adder = DfsAddConstant();
 filein  = 'data\TS1.dfs0';
 fileout = 'output\add_constant.dfs0';
