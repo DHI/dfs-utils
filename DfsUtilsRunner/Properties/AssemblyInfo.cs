@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DfsUtils")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Command-line tools for manipulating MIKE dfs files")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DfsUtils")]

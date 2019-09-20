@@ -70,9 +70,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DfsUtils\DfsUtils.csproj">
+    <ProjectReference Include="..\DfsUtilsLib\DfsUtilsLib.csproj">
       <Project>{ad926dca-6e05-4a04-9fa9-7dbbe95b5b86}</Project>
-      <Name>DfsUtils</Name>
+      <Name>DfsUtilsLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DfsUtils", "DfsUtils\DfsUtils.csproj", "{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DfsUtilsLib", "DfsUtilsLib\DfsUtilsLib.csproj", "{AD926DCA-6E05-4A04-9FA9-7DBBE95B5B86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DfsUtilsRunner", "DfsUtilsRunner\DfsUtilsRunner.csproj", "{21FA7C68-C568-4FC8-B6D5-7222DB723372}"
 EndProject
