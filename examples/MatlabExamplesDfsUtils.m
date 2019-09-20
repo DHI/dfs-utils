@@ -1,5 +1,5 @@
 %% load assembly
-NET.addAssembly([cd,'\..\bin\Release\DfsUtils.dll']);
+NET.addAssembly([cd,'\..\DfsUtilsLib\bin\Release\DfsUtilsLib.dll']);
 import DHI.DFS.Utilities.*;  % DfsAdd, DfsDiff, DfsFactor, DfsKitchenSink
 
 %% example 1 
