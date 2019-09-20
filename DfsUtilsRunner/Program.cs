@@ -12,7 +12,10 @@ namespace DHI.DFS.Utilities.Runner
         static void Main(string[] args)
         {
             if (!_VerifyArgs(args))
+            {
                 _PrintUsage();
+                Environment.Exit(-1);
+            }
 
             var tool = _GetTool(args[0]);
 
