@@ -1,5 +1,5 @@
 # dfs-utils
-Command-line tools for manipulating MIKE dfs files. 
+Command-line tools for manipulating [MIKE dfs files](http://docs.mikepoweredbydhi.com/core_libraries/dfs/dfs-file-formats/). 
 
 DfsUtils is a collection of tools which inputs 1 or 2 dfs files does some 
 manipulation and the outputs a new dfs file of the same type. 
