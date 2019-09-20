@@ -19,6 +19,11 @@ If your DHI.Generic.MikeZero assemblies is in a non-standard location then pleas
 these references.
 
 
+## Installation
+If you have MIKE Zero 2019 installed, then simply copy the [binaries](./distribution/DfsUtils_MIKE2019.zip) to your MIKE bin-x64 folder 
+(typically C:\Program Files (x86)\DHI\2019\bin\x64). 
+
+
 ## Tools
 
 The following tools are currently available.
