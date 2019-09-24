@@ -70,10 +70,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DHI.Generic.MikeZero.DFS">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DHI\2019\MIKE SDK\bin\DHI.Generic.MikeZero.DFS.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DHI\2020\MIKE SDK\bin\DHI.Generic.MikeZero.DFS.dll</HintPath>
     </Reference>
     <Reference Include="DHI.Generic.MikeZero.EUM">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DHI\2019\MIKE SDK\bin\DHI.Generic.MikeZero.EUM.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DHI\2020\MIKE SDK\bin\DHI.Generic.MikeZero.EUM.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
