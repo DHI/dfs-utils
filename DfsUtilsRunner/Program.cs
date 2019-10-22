@@ -15,30 +15,37 @@ namespace DHI.DFS.Utilities.Runner
                 _PrintUsage();
 
             var tool = _GetTool(args[0]);
-
-            switch (tool)
+            
+            try
             {
-                case DfsTool.Scale:
-                    _RunScaleTool(args);
-                    break;
-                case DfsTool.AddConstant:
-                    _RunAddConstantTool(args);
-                    break;
-                case DfsTool.Sum:
-                    _RunSumTool(args);
-                    break;
-                case DfsTool.Diff:
-                    _RunDiffTool(args);
-                    break;
-                case DfsTool.ExtractTimeSteps:
-                    _RunExtractStepsTool(args);
-                    break;
-                case DfsTool.Flatten:
-                    _RunFlattenTool(args);
-                    break;
-                default:
-                    break;
+                switch (tool)
+                {
+                    case DfsTool.Scale:
+                        _RunScaleTool(args);
+                        break;
+                    case DfsTool.AddConstant:
+                        _RunAddConstantTool(args);
+                        break;
+                    case DfsTool.Sum:
+                        _RunSumTool(args);
+                        break;
+                    case DfsTool.Diff:
+                        _RunDiffTool(args);
+                        break;
+                    case DfsTool.ExtractTimeSteps:
+                        _RunExtractStepsTool(args);
+                        break;
+                    case DfsTool.Flatten:
+                        _RunFlattenTool(args);
+                        break;
+                    default:
+                        break;
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error:" + e.Message);
+            }            
         }
 
         private static void _RunScaleTool(string[] args)
@@ -126,7 +133,16 @@ namespace DHI.DFS.Utilities.Runner
 
         private static void _RunFlattenTool(string[] args)
         {
-            throw new NotImplementedException();
+            if (args.Count() < 3)
+            {
+                Console.WriteLine(">DfsUtils Flatten infile.dfsu outfile.dfsu");
+                throw new ArgumentException("Flatten needs 2 arguments");
+            }
+            var infile = args[1];            
+            var outfile = args[2];
+
+            var flattener = new DfsFlatten();
+            flattener.Run(infile, outfile);
         }
 
         private static bool _VerifyArgs(string[] args)
@@ -156,6 +172,8 @@ namespace DHI.DFS.Utilities.Runner
             Console.WriteLine(">DfsUtils Scale infile.dfsu 0.9 outfile.dfsu");
             Console.WriteLine(">DfsUtils Sum file1.dfs2 file2.dfs2 outfile.dfs2");
             Console.WriteLine(">DfsUtils Diff file1.dfs2 file2.dfs2 outfile.dfs2");
+            Console.WriteLine(">DfsUtils ExtractSteps infile.dfs0 outfile.dfs0 20 -1 2");
+            Console.WriteLine(">DfsUtils TimeAverage infile.dfs1 outfile.dfs1");
         }
 
         private static DfsTool _GetTool(string arg0)
