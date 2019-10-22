@@ -28,12 +28,12 @@ If you have MIKE Zero 2019 installed, then simply copy the [binaries](./distribu
 
 The following tools are currently available.
 
-* AddConstant: add a constant to all data in the file
 * Scale: multiply all data in file with a scale factor
+* AddConstant: add a constant to all data in the file
 * Sum: add to files together
 * Diff: subtract to files from each other
 * ExtractTimeSteps: extract specific timesteps between start and end with a stride
-
+* TimeAverage: make a time averaged file 
 
 ## Examples
 Examples can be found in the examples folder including small test dfs files. 
