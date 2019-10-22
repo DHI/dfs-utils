@@ -55,7 +55,7 @@ Examples of all the available tools:
     > DfsUtils AddConstant infile.dfsu 10.0 outfile.dfsu
     > DfsUtils Sum file1.dfs2 file2.dfs2 outfile.dfs2
     > DfsUtils Diff file1.dfs2 file2.dfs2 outfile.dfs2
-    > DfsUtils ExtractSteps infile.dfs0 outfile.dfs0 20 -1 2
+    > DfsUtils ExtractTimeSteps infile.dfs0 outfile.dfs0 20 -1 2
     > DfsUtils TimeAverage infile.dfs1 outfile.dfs1
 
 NOTE: in all cases the tool can be used with any type of dfs file. 
