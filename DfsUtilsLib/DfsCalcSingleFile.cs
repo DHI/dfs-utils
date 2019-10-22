@@ -19,6 +19,11 @@ namespace DHI.DFS.Utilities
         {
             if (!File.Exists(inputfile))
                 throw new Exception(String.Format("Input file {0} does not exist!", inputfile));
+
+            var ext1 = Path.GetExtension(inputfile).ToLower();
+            var ext2 = Path.GetExtension(outputfile).ToLower();
+            if (ext1 != ext2)
+                throw new Exception("Input and output files must have same extension!");
             
             try
             {

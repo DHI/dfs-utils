@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,10 @@ namespace DHI.DFS.Utilities.Runner
         static void Main(string[] args)
         {
             if (!_VerifyArgs(args))
+            { 
                 _PrintUsage();
+                return;
+            }
 
             var tool = _GetTool(args[0]);
             
@@ -50,7 +54,7 @@ namespace DHI.DFS.Utilities.Runner
 
         private static void _RunScaleTool(string[] args)
         {            
-            if (args.Count() < 4)
+            if (args.Count() != 4)
             {   
                 Console.WriteLine(">DfsUtils Scale infile.dfsu 0.9 outfile.dfsu");
                 throw new ArgumentException("Scale needs 3 arguments");
@@ -65,7 +69,7 @@ namespace DHI.DFS.Utilities.Runner
 
         private static void _RunAddConstantTool(string[] args)
         {
-            if (args.Count() < 4)
+            if (args.Count() != 4)
             {
                 Console.WriteLine(">DfsUtils AddConstant infile.dfsu 7 outfile.dfsu");
                 throw new ArgumentException("AddConstant needs 3 arguments");
@@ -80,7 +84,7 @@ namespace DHI.DFS.Utilities.Runner
 
         private static void _RunSumTool(string[] args)
         {
-            if (args.Count() < 4)
+            if (args.Count() != 4)
             {
                 Console.WriteLine(">DfsUtils Sum file1.dfsu file2.dfsu outfile.dfsu");
                 throw new ArgumentException("Sum needs 3 arguments");
@@ -95,7 +99,7 @@ namespace DHI.DFS.Utilities.Runner
 
         private static void _RunDiffTool(string[] args)
         {
-            if (args.Count() < 4)
+            if (args.Count() != 4)
             {
                 Console.WriteLine(">DfsUtils Diff infile.dfsu 0.9 outfile.dfsu");
                 throw new ArgumentException("Diff needs 3 arguments");
@@ -110,7 +114,7 @@ namespace DHI.DFS.Utilities.Runner
 
         private static void _RunExtractStepsTool(string[] args)
         {
-            if (args.Count() < 5)
+            if (args.Count() < 5 || args.Count() > 6)
             {
                 Console.WriteLine(">DfsUtils ExtractSteps infile.dfsu outfile.dfsu start end [stride]");
                 Console.WriteLine(">DfsUtils ExtractSteps infile.dfsu outfile.dfsu 10 -1 2");
@@ -133,10 +137,10 @@ namespace DHI.DFS.Utilities.Runner
 
         private static void _RunFlattenTool(string[] args)
         {
-            if (args.Count() < 3)
+            if (args.Count() != 3)
             {
-                Console.WriteLine(">DfsUtils Flatten infile.dfsu outfile.dfsu");
-                throw new ArgumentException("Flatten needs 2 arguments");
+                Console.WriteLine(">DfsUtils TimeAverage infile.dfsu outfile.dfsu");
+                throw new ArgumentException("TimeAverage needs 2 arguments");
             }
             var infile = args[1];            
             var outfile = args[2];
@@ -147,11 +151,11 @@ namespace DHI.DFS.Utilities.Runner
 
         private static bool _VerifyArgs(string[] args)
         {
-            if (args.Count() < 3)
-            {
-                Console.WriteLine("Too few arguments");
-                return false;
-            }
+            //if (args.Count() < 3)
+            //{
+            //    Console.WriteLine("Too few arguments");
+            //    return false;
+            //}
             DfsTool tool;
             try
             { 
@@ -170,6 +174,7 @@ namespace DHI.DFS.Utilities.Runner
             Console.WriteLine("Usage:");
             Console.WriteLine(">DfsUtils [toolname] [args]");
             Console.WriteLine(">DfsUtils Scale infile.dfsu 0.9 outfile.dfsu");
+            Console.WriteLine(">DfsUtils AddConstant infile.dfsu 10.0 outfile.dfsu");
             Console.WriteLine(">DfsUtils Sum file1.dfs2 file2.dfs2 outfile.dfs2");
             Console.WriteLine(">DfsUtils Diff file1.dfs2 file2.dfs2 outfile.dfs2");
             Console.WriteLine(">DfsUtils ExtractSteps infile.dfs0 outfile.dfs0 20 -1 2");
@@ -198,7 +203,6 @@ namespace DHI.DFS.Utilities.Runner
                     throw new Exception("No such tool: " + arg0);
             }
         }
-
     }
 
     enum DfsTool { Scale, AddConstant, Sum, Diff, ExtractTimeSteps, Flatten}

@@ -27,6 +27,14 @@ namespace DHI.DFS.Utilities
             if (!File.Exists(inputfile2))
                 throw new Exception(String.Format("Second input file {0} does not exist!", inputfile1));
 
+            var ext1 = Path.GetExtension(inputfile1).ToLower();
+            var ext2 = Path.GetExtension(inputfile2).ToLower();
+            if (ext1 != ext2)
+                throw new Exception("Input files must have same extension!");
+            var ext_out = Path.GetExtension(outputfile).ToLower();
+            if (ext1 != ext_out)
+                throw new Exception("Input and output files must have same extension!");
+
             try
             {
                 _dfsInput1 = DfsFileFactory.DfsGenericOpen(inputfile1);

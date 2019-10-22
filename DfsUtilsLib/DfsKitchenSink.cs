@@ -21,7 +21,13 @@ namespace DHI.DFS.Utilities
             this.OutputFile = outputFile;
 
             if (!File.Exists(InputFile))
-                throw new Exception(String.Format("Input file {0} does not exist!", InputFile));            
+                throw new Exception(String.Format("Input file {0} does not exist!", InputFile));
+
+            var ext1 = Path.GetExtension(inputFile).ToLower();
+            var ext2 = Path.GetExtension(outputFile).ToLower();
+            if (ext1 != ext2)
+                throw new Exception("Input and output files must have same extension!");
+
         }
 
         public void ExtractTimeSteps(int starttimestep, int endtimestep)
