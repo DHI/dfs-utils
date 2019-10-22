@@ -49,11 +49,16 @@ Most tools use this overall syntax
 
     > DfsUtils [toolname] [inputfile] [arguments] [outputfile] 
 
-To add a constant to a file (and output results to a new file):
+Examples of all the available tools: 
 
-    > DfsUtils AddConstant infile1.dfsu 0.34 outfile.dfsu
+    > DfsUtils Scale infile.dfsu 0.9 outfile.dfsu
+    > DfsUtils AddConstant infile.dfsu 10.0 outfile.dfsu
+    > DfsUtils Sum file1.dfs2 file2.dfs2 outfile.dfs2
+    > DfsUtils Diff file1.dfs2 file2.dfs2 outfile.dfs2
+    > DfsUtils ExtractSteps infile.dfs0 outfile.dfs0 20 -1 2
+    > DfsUtils TimeAverage infile.dfs1 outfile.dfs1
 
-NOTE: here the file is dfsu but it could be any type of dfs file. 
+NOTE: in all cases the tool can be used with any type of dfs file. 
 
 
 
