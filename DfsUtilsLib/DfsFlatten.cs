@@ -1,5 +1,6 @@
 ﻿using DHI.Generic.MikeZero.DFS;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -15,15 +16,12 @@ namespace DHI.DFS.Utilities
             if (!File.Exists(inputfile))
                 throw new Exception(String.Format("Input file {0} does not exist!", inputfile));
 
-
-            throw new NotImplementedException();
-
             try
             {
                 _dfsInput = DfsFileFactory.DfsGenericOpen(inputfile);
                 _dfsOutput = DfsOutput.CreateFromTemplate(_dfsInput, outputfile);
 
-                //ProcessAllTimeSteps(_dfsOutput);
+                ProcessAllTimeSteps(_dfsOutput);
             }
             finally
             {
@@ -37,18 +35,34 @@ namespace DHI.DFS.Utilities
             var nTimes = _dfsInput.FileInfo.TimeAxis.NumberOfTimeSteps;
             var nItems = _dfsInput.ItemInfo.Count;
 
-            for (int timestep = 0; timestep < nTimes; timestep++)
+            List<float[]> outdatalist = new List<float[]>();
+
+            int timestep0 = 0;
+            for (int item = 1; item <= nItems; ++item)
+            {
+                var indatatime = _dfsInput.ReadItemTimeStep(item, timestep0);
+                var indata = (float[])indatatime.Data;                
+                outdatalist.Add(indata);
+            }
+
+            // from step 1 and onwards
+            for (int timestep = 1; timestep < nTimes; timestep++)
             {
                 for (int item = 1; item <= nItems; ++item)
                 {
                     var indatatime = _dfsInput.ReadItemTimeStep(item, timestep);
                     var indata = (float[])indatatime.Data;
-                    var time = indatatime.Time;
+                    //var time = indatatime.Time;
 
-                    //var outdata = indata.Select(r => r * fac + constant).ToArray();
-
-                    //outputDfs.WriteItemTimeStepNext(time, outdata);
+                    outdatalist[item-1] = outdatalist[item-1].Zip(indata, (x, y) => x + y).ToArray();                    
                 }
+            }
+
+            for (int item = 1; item <= nItems; ++item)
+            {
+                outdatalist[item-1] = outdatalist[item-1].Select(
+                    x => x / Convert.ToSingle(nTimes)).ToArray();
+                outputDfs.WriteItemTimeStepNext(timestep0, outdatalist[item-1]);
             }
         }
 
