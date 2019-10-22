@@ -52,8 +52,8 @@ namespace DHI.DFS.Utilities
                 {
                     var indatatime = _dfsInput.ReadItemTimeStep(item, timestep);
                     var indata = (float[])indatatime.Data;
-                    //var time = indatatime.Time;
-
+                    
+                    // sum data 
                     outdatalist[item-1] = outdatalist[item-1].Zip(indata, (x, y) => x + y).ToArray();                    
                 }
             }
