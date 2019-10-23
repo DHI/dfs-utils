@@ -151,11 +151,6 @@ namespace DHI.DFS.Utilities.Runner
 
         private static bool _VerifyArgs(string[] args)
         {
-            //if (args.Count() < 3)
-            //{
-            //    Console.WriteLine("Too few arguments");
-            //    return false;
-            //}
             DfsTool tool;
             try
             { 
