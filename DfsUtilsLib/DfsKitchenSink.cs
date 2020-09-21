@@ -30,6 +30,25 @@ namespace DHI.DFS.Utilities
 
         }
 
+        public void ExtractItems(List<int> items)
+        {
+            try
+            {
+                _OpenFiles();
+                var starttimestep = 0;
+                var endtimestep = _inputDfs.FileInfo.TimeAxis.NumberOfTimeSteps-1;
+                var stride = 1;
+                var timesteps = _GetTimeSteps(starttimestep, endtimestep);
+                _outputDfs = _CreateFromTemplate(_inputDfs, OutputFile, timesteps, stride, items);                
+                _ProcessAllTimeSteps(timesteps, stride, items);
+            }
+            finally
+            {
+                _inputDfs.Close();
+                _outputDfs.Close();
+            }
+        }
+
         public void ExtractTimeSteps(int starttimestep, int endtimestep)
         {
             ExtractTimeSteps(starttimestep, endtimestep, 1);
@@ -93,13 +112,19 @@ namespace DHI.DFS.Utilities
 
         private DfsFile _CreateFromTemplate(IDfsFile dfsTemplate, string outputfile, IEnumerable<int> timesteps, int stride)
         {
+            var items = Enumerable.Range(0, DfsOutput._NumberItems(dfsTemplate.ItemInfo)).ToList();            
+            return _CreateFromTemplate(dfsTemplate, outputfile, timesteps, stride, items);
+        }        
+
+        private DfsFile _CreateFromTemplate(IDfsFile dfsTemplate, string outputfile, IEnumerable<int> timesteps, int stride, List<int> items)
+        {
             IDfsFileInfo fi = dfsTemplate.FileInfo;
             //this._AnalyzeDfsInputItems(dfsTemplate.ItemInfo);
             var builder = DfsBuilder.Create(fi.FileTitle, fi.ApplicationTitle, fi.ApplicationVersion);
 
             IDfsTemporalAxis timeAxis = _CorrectTimeAxis(fi.TimeAxis, timesteps.First(), stride);
             DfsOutput.CreateHeader(fi, builder, timeAxis);
-            DfsOutput.CreateDynamicItems(builder, dfsTemplate.ItemInfo);
+            DfsOutput.CreateDynamicItems(builder, dfsTemplate.ItemInfo, items);
 
             builder.CreateFile(outputfile);
 
@@ -171,6 +196,41 @@ namespace DHI.DFS.Utilities
 
                     _outputDfs.WriteItemTimeStepNext(time, data);
                 }                
+            }
+        }
+
+        private void _ProcessAllTimeSteps(List<int> timesteps, int stride, List<int> items)
+        {
+            int j = -1;
+            var is_dfsu = _inputDfs.ItemInfo[0].Name == "Z coordinate";
+            var item_offset = 0;
+            if (is_dfsu)
+                item_offset = 1;
+
+            foreach (var timestep in timesteps)
+            {
+                j++;
+                if (j % stride != 0)
+                    continue;
+
+                if (is_dfsu)
+                {
+                    var itemdata = _inputDfs.ReadItemTimeStep(1, timestep); // zn
+                    var data = (float[])itemdata.Data;
+                    var time = itemdata.Time;
+                    _outputDfs.WriteItemTimeStepNext(time, data);
+                }
+                    //dfsBuilder.AddDynamicItem(dynamicItems[0]);  //  z item (node values) 
+
+
+                foreach (int item in items)
+                {
+                    var itemdata = _inputDfs.ReadItemTimeStep(item + 1 + item_offset, timestep); // from 0 to 1-based
+                    var data = (float[])itemdata.Data;
+                    var time = itemdata.Time;
+
+                    _outputDfs.WriteItemTimeStepNext(time, data);
+                }
             }
         }
 

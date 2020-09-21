@@ -40,7 +40,8 @@ namespace DHI.DFS.Utilities
             }
             else
             {
-                CreateDynamicItems(builder, dfsTemplate.ItemInfo);
+                var items = Enumerable.Range(0,_NumberItems(dfsTemplate.ItemInfo)).ToList();
+                CreateDynamicItems(builder, dfsTemplate.ItemInfo, items);
             }
             builder.CreateFile(outputfile);
 
@@ -66,7 +67,7 @@ namespace DHI.DFS.Utilities
             return isDfsu3d ? 1 : 0;
         }
 
-        private static int _NumberItems(IList<IDfsDynamicItemInfo> items)
+        public static int _NumberItems(IList<IDfsDynamicItemInfo> items)
         {
             var isDfsu3d = _IsDfsu3d(items);            
             return (items.Count - _ItemOffset(isDfsu3d));
@@ -100,17 +101,29 @@ namespace DHI.DFS.Utilities
                 builder.AddCustomBlock(cb);
         }
 
-        public static void CreateDynamicItems(DfsBuilder dfsBuilder, IList<IDfsDynamicItemInfo> dynamicItems)
+        public static void CreateDynamicItems(DfsBuilder dfsBuilder, IList<IDfsDynamicItemInfo> dynamicItems, List<int> items)
         {
             var nItems = dynamicItems.Count;
+            //var nItemsReq = items.Count;
+            var itemoffset = _ItemOffset(_IsDfsu3d(dynamicItems));
+
+            if (_IsDfsu3d(dynamicItems))
+                dfsBuilder.AddDynamicItem(dynamicItems[0]);  //  z item (node values) 
+
+            foreach (int index in items)
+            {
+                dfsBuilder.AddDynamicItem(dynamicItems[index + itemoffset]);
+            }
+
+
             //var nItems = _NumberItems(dynamicItems);
             //var itemoffset = _ItemOffset(_IsDfsu3d(dynamicItems));
 
-            for (int index = 0; index < nItems; ++index)
-            {
-                //var dynamicItem = dynamicItems[index + itemoffset];
-                dfsBuilder.AddDynamicItem(dynamicItems[index]);
-            }
+            //for (int index = 0; index < nItems; ++index)
+            //{
+            //    //var dynamicItem = dynamicItems[index + itemoffset];
+            //    dfsBuilder.AddDynamicItem(dynamicItems[index]);
+            //}
         }
 
         private static void _CreateRepeatedDynamicItems(DfsBuilder dfsBuilder, IList<IDfsDynamicItemInfo> dynamicItems, int nRepeats)

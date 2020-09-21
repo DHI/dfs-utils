@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DHI.DFS.Utilities
 {
-    public class DfsFlatten
+    public class DfsTimeAverage
     {
         private IDfsFile _dfsInput;
         private IDfsFile _dfsOutput;
@@ -58,23 +58,23 @@ namespace DHI.DFS.Utilities
                 }
             }
 
+            //for (int item = 1; item <= nItems; ++item)
+            //{
+            //    outdatalist[item - 1] = outdatalist[item - 1].Select(
+            //        x => x / Convert.ToSingle(nTimes)).ToArray();
+            //    outputDfs.WriteItemTimeStepNext(timestep0, outdatalist[item - 1]);
+            //}
+
+            // write time averaged output (the same)
+            timestep0 = 0; // could also be nTimes
             for (int item = 1; item <= nItems; ++item)
             {
                 outdatalist[item - 1] = outdatalist[item - 1].Select(
-                    x => x / Convert.ToSingle(nTimes)).ToArray();
-                outputDfs.WriteItemTimeStepNext(timestep0, outdatalist[item - 1]);
+                        x => x / Convert.ToSingle(nTimes)).ToArray();
+                var indatatime = _dfsInput.ReadItemTimeStep(item, timestep0);
+                outputDfs.WriteItemTimeStep(item, timestep0, indatatime.Time, outdatalist[item - 1]);
             }
 
-            // write all steps (the same)
-            for (int timestep = 0; timestep < nTimes; timestep++)
-            {
-                for (int item = 1; item <= nItems; ++item)
-                {
-                    var indatatime = _dfsInput.ReadItemTimeStep(item, timestep);
-                    //outputDfs.WriteItemTimeStepNext(timestep, outdatalist[item - 1]);  // indatatime.Time
-                    outputDfs.WriteItemTimeStep(item, timestep, indatatime.Time, outdatalist[item - 1]);  // indatatime.Time
-                }
-            }
         }
 
     }

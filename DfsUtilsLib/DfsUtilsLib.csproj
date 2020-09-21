@@ -86,7 +86,9 @@
   <ItemGroup>
     <Compile Include="DfsAddConstant.cs" />
     <Compile Include="DfsCalcSingleFile.cs" />
+    <Compile Include="DfsTimeAverage.cs" />
     <Compile Include="DfsFlatten.cs" />
+    <Compile Include="DfsItemsExtractor.cs" />
     <Compile Include="DfsTimeStepsExtractor.cs" />
     <Compile Include="DfsHelper.cs" />
     <Compile Include="DfsKitchenSink.cs" />

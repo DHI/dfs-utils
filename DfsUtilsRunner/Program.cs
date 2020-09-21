@@ -39,6 +39,12 @@ namespace DHI.DFS.Utilities.Runner
                     case DfsTool.ExtractTimeSteps:
                         _RunExtractStepsTool(args);
                         break;
+                    case DfsTool.ExtractItems:
+                        _RunExtractItemsTool(args);
+                        break;
+                    case DfsTool.TimeAverage:
+                        _RunTimeAverageTool(args);
+                        break;
                     case DfsTool.Flatten:
                         _RunFlattenTool(args);
                         break;
@@ -135,12 +141,48 @@ namespace DHI.DFS.Utilities.Runner
             }
         }
 
-        private static void _RunFlattenTool(string[] args)
+        private static void _RunExtractItemsTool(string[] args)
+        {
+            if (args.Count() < 4)
+            {
+                Console.WriteLine(">DfsUtils ExtractItems infile.dfs0 outfile.dfs0 1 3 5 8");
+                throw new ArgumentException("ExtractItems 3 or more arguments");
+            }
+            var infile = args[1];
+            var outfile = args[2];
+
+            int nitems = args.Count() - 3;
+            var items = new int[nitems];
+
+            for (int i = 0; i < nitems; i++)
+            {
+                items[i] = Convert.ToInt32(args[i + 3]) - 1;  // make 0-based index
+                //Console.WriteLine("item " +i + " is " + items[i]);
+            }
+            
+            DfsItemsExtractor.Extract(infile, outfile, items);            
+        }
+
+        private static void _RunTimeAverageTool(string[] args)
         {
             if (args.Count() != 3)
             {
                 Console.WriteLine(">DfsUtils TimeAverage infile.dfsu outfile.dfsu");
                 throw new ArgumentException("TimeAverage needs 2 arguments");
+            }
+            var infile = args[1];
+            var outfile = args[2];
+
+            var ta = new DfsTimeAverage();
+            ta.Run(infile, outfile);
+        }
+
+        private static void _RunFlattenTool(string[] args)
+        {
+            if (args.Count() != 3)
+            {
+                Console.WriteLine(">DfsUtils Flatten infile.dfsu outfile.dfsu");
+                throw new ArgumentException("Flatten needs 2 arguments");
             }
             var infile = args[1];            
             var outfile = args[2];
@@ -173,7 +215,9 @@ namespace DHI.DFS.Utilities.Runner
             Console.WriteLine(">DfsUtils Sum file1.dfs2 file2.dfs2 outfile.dfs2");
             Console.WriteLine(">DfsUtils Diff file1.dfs2 file2.dfs2 outfile.dfs2");
             Console.WriteLine(">DfsUtils ExtractSteps infile.dfs0 outfile.dfs0 20 -1 2");
+            Console.WriteLine(">DfsUtils ExtractItems infile.dfs0 outfile.dfs0 1,3,5,8");
             Console.WriteLine(">DfsUtils TimeAverage infile.dfs1 outfile.dfs1");
+            // Console.WriteLine(">DfsUtils Flatten infile.dfs1 outfile.dfs1");
         }
 
         private static DfsTool _GetTool(string arg0)
@@ -191,15 +235,18 @@ namespace DHI.DFS.Utilities.Runner
                     return DfsTool.Diff;
                 case "extracttimesteps": case "extractsteps":
                     return DfsTool.ExtractTimeSteps;
+                case "extractitems":
+                    return DfsTool.ExtractItems;
                 case "flatten":
-                case "timeaverage": 
-                    return DfsTool.Flatten;                    
+                    return DfsTool.Flatten;
+                case "timeaverage":                     
+                    return DfsTool.TimeAverage;
                 default:
                     throw new Exception("No such tool: " + arg0);
             }
         }
     }
 
-    enum DfsTool { Scale, AddConstant, Sum, Diff, ExtractTimeSteps, Flatten}
+    enum DfsTool { Scale, AddConstant, Sum, Diff, ExtractTimeSteps, ExtractItems, Flatten, TimeAverage}
 
 }
